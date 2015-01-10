@@ -8,8 +8,14 @@ function getTime() {
     hours = hours > 12 ? hours - 12 : hours;
 
     var minutes = d.getMinutes();
+
     var seconds = d.getSeconds();
+
+    var mins  = minutes < 10 ? "0" + minutes : minutes;
+    var secs = seconds < 10 ? "0" + seconds : seconds;
+
+    var time = "" + hours + ":" + mins + ":" + secs + " " + ampm;
     
-    document.getElementById("clock").innerHTML = "" + hours + ":" + minutes + ":" + seconds + " " + ampm;
+    document.getElementById("clock").innerHTML = time; 
     setTimeout(getTime, 1000);
 }
