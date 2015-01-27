@@ -3,7 +3,7 @@ body {
     text-align: center;
 }
 
-p .header {
+p, .header {
     color: white;
 }
 
