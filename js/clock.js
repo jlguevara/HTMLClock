@@ -10,6 +10,8 @@ function getTime() {
     var ampm = hours > 12 ? "pm" : "am";
 
     hours = hours > 12 ? hours - 12 : hours;
+    if (hours == 0)
+        hours = 12;
 
     var minutes = d.getMinutes();
 
