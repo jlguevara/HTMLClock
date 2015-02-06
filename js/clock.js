@@ -1,7 +1,60 @@
 $(document).ready(function() {
         getTime();
         getTemp();
+        fillDropdowns();
+        getAllAlarms();
         });
+
+function deleteAlarm() {
+    var id = $("#deleteAlarm").val();
+    if (!id)
+        return;
+
+    var AlarmObject = Parse.Object.extend("Alarm");
+        var query = new Parse.Query(AlarmObject); 
+        query.get(id, {
+            success: function(object) {
+                object.destroy();
+                $("#deleteAlarm").empty();
+                $("#deleteAlarm").append("<option></option>");
+                location.reload();
+            },
+            error: function(object, error) {
+                document.write("error");
+            }
+        });
+}
+
+function fillDropdowns() {
+    var dropdown = $("#hours");
+    
+    for (var i = 1; i <= 12; i++)
+        dropdown.append("<option>" + i + "</option>");
+
+    dropdown = $("#mins");
+    for (var i = 0; i <= 59; i++) {
+       dropdown.append("<option>" + (i < 10 ? "0" + i : i) + "</option>"); 
+    }
+
+}
+
+function getAllAlarms() {
+    Parse.initialize("vSvlrhH9RNAxhGK4Y6tJ8AsCT6tFWOQd3QLwhcdM", "TRxPNlxUTmAt5rQUHIvot46RwYNFp4CqW4VHEPcG");
+    var AlarmObject = Parse.Object.extend("Alarm");
+    var query = new Parse.Query(AlarmObject);
+    $("#alarms").empty();
+    query.find({
+success: function(results) {
+for (var i = 0; i < results.length; i++) {
+insertAlarm(results[i].get("time"), results[i].get("alarmName"));
+
+    // add to list of alarms to delete
+    $("#deleteAlarm").append("<option value=\"" + results[i].id + "\">" 
+        + results[i].get("alarmName") + "</option>");
+}
+}
+});
+}
 
 function showAlarmPopup() {
     $("#mask").removeClass("hide");
@@ -13,22 +66,37 @@ function hideAlarmPopup() {
     $("#popup").addClass("hide");
 }
 
-function insertAlarm(hours, mins, ampm, alarmName) {
+function insertAlarm(time, alarmName) {
     var listing = $("<div>").addClass("flexable");
     listing.append($("<div>").addClass("name").html(alarmName));
 
-    var time = "" + hours + ":" + mins + ampm;
     listing.append($("<div>").addClass("time").html(time));
     $("#alarms").append(listing); 
+    
+
 }
 
 function addAlarm() {
     var hours = $("#hours option:selected").text();
     var mins = $("#mins option:selected").text();
     var ampm = $("#ampm option:selected").text();
+    var time = "" + hours + ":" + mins + ampm;
+
     var alarmName = $("#alarmName").val(); 
-    insertAlarm(hours, mins, ampm, alarmName);
+
+    var AlarmObject = Parse.Object.extend("Alarm");
+    var alarmObject = new AlarmObject();
+    alarmObject.save({"time": time, "alarmName": alarmName}, {
+success: function(object) {
+    insertAlarm(time, alarmName);
     hideAlarmPopup();
+    
+    // add to list of alarms to delete
+    $("#deleteAlarm").append("<option value=\"" + alarmObject.id + "\">" 
+        + alarmName + "</option>");
+}
+});
+
 }
 
 function getTime() {

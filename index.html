@@ -18,6 +18,13 @@
                 <input type="button" class="button" value="Add Alarm" onclick="showAlarmPopup()"/>
             </div>
             <div id="alarms"></div>
+
+            <div id="delete">
+                <select id="deleteAlarm">
+                    <option></option>
+                </select>
+                <input type="button" class="button" value="Delete Alarm" onclick="deleteAlarm()"/>
+        </div>
         </div>
 
         <div id="mask" class="hide"></div>
@@ -25,10 +32,8 @@
             <h1>Add Alarm</h1>
             <div id="timeContainer">
                 <select id="hours">
-                    <option>1</option>
                 </select>
                 <select id="mins">
-                    <option>01</option>
                 </select>
                 <select id="ampm">
                     <option>am</option>
@@ -43,6 +48,7 @@
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://www.parsecdn.com/js/parse-1.3.4.min.js"></script>
         <script src="js/clock.js"></script>
     </body>
 </html>
