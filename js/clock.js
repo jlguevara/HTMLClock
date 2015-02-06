@@ -14,10 +14,13 @@ function deleteAlarm() {
         var query = new Parse.Query(AlarmObject); 
         query.get(id, {
             success: function(object) {
-                object.destroy();
-                $("#deleteAlarm").empty();
-                $("#deleteAlarm").append("<option></option>");
-                location.reload();
+                object.destroy( {
+                    success: function(myobject) {
+                        $("#deleteAlarm").empty();
+                        $("#deleteAlarm").append("<option></option>");
+                        getAllAlarms();
+                    }
+                });
             },
             error: function(object, error) {
                 document.write("error");
