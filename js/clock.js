@@ -63,6 +63,10 @@ $("#deleteAlarm").append("<option value=\"" + results[i].id + "\">"
 }
 
 function showAlarmPopup() {
+   if (!USERID) {
+      alert("You ain't logged in...");
+      return;
+   }
     $("#mask").removeClass("hide");
     $("#popup").removeClass("hide");
 }
