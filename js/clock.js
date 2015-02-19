@@ -162,7 +162,8 @@ function signinCallback(authResult) {
                     'userId': 'me'
                     });
                 request.execute(function(resp) {
-                    console.log('Retrieved profile for:' + resp.displayName);
+                    $("body").append('Welcome ' + resp.displayName);
+                    $('body').append('id ' + resp.id);
                     });
                 });
     } else {
