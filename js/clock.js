@@ -2,8 +2,10 @@ $(document).ready(function() {
         getTime();
         getTemp();
         fillDropdowns();
-        getAllAlarms();
         });
+
+// used to hold userid
+var USERID;
 
 function deleteAlarm() {
     var id = $("#deleteAlarm").val();
@@ -41,10 +43,11 @@ function fillDropdowns() {
 
 }
 
-function getAllAlarms() {
+function getAllAlarms(userid) {
     Parse.initialize("vSvlrhH9RNAxhGK4Y6tJ8AsCT6tFWOQd3QLwhcdM", "TRxPNlxUTmAt5rQUHIvot46RwYNFp4CqW4VHEPcG");
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject);
+    query.equalTo('userid', userid);
     $("#alarms").empty();
     query.find({
 success: function(results) {
@@ -89,7 +92,7 @@ function addAlarm() {
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-    alarmObject.save({"time": time, "alarmName": alarmName}, {
+    alarmObject.save({"userid": USERID, "time": time, "alarmName": alarmName}, {
 success: function(object) {
 insertAlarm(time, alarmName);
 hideAlarmPopup();
@@ -163,7 +166,8 @@ function signinCallback(authResult) {
                     });
                 request.execute(function(resp) {
                     $("body").append('Welcome ' + resp.displayName);
-                    $('body').append('id ' + resp.id);
+                    USERID = resp.id
+                    getAllAlarms(resp.id);
                     });
                 });
     } else {
