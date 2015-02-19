@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/clock.css" />
         <link rel="stylesheet" href="css/alarm.css" />
+        <script src="https://apis.google.com/js/client:platform.js" async defer></script>
     </head>
     <body>
         <p class="header">What time is it?<p>
@@ -24,7 +25,7 @@
                     <option></option>
                 </select>
                 <input type="button" class="button" value="Delete Alarm" onclick="deleteAlarm()"/>
-        </div>
+            </div>
         </div>
 
         <div id="mask" class="hide"></div>
@@ -46,6 +47,17 @@
                 <input type="button" value="Save Alarm" class="button" onclick="addAlarm()"/>
             </div>
         </div>
+
+        <span id="signinButton">
+            <span
+                class="g-signin"
+                data-callback="signinCallback"
+                data-clientid="869041803131-j7aj71q43hdcm6voqg1ns2euce4n2phn.apps.googleusercontent.com"
+                data-cookiepolicy="single_host_origin"
+                data-requestvisibleactions="http://schema.org/AddAction"
+                data-scope="profile"
+            </span>
+        </span>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://www.parsecdn.com/js/parse-1.3.4.min.js"></script>

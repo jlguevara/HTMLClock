@@ -11,32 +11,32 @@ function deleteAlarm() {
         return;
 
     var AlarmObject = Parse.Object.extend("Alarm");
-        var query = new Parse.Query(AlarmObject); 
-        query.get(id, {
-            success: function(object) {
-                object.destroy( {
-                    success: function(myobject) {
-                        $("#deleteAlarm").empty();
-                        $("#deleteAlarm").append("<option></option>");
-                        getAllAlarms();
-                    }
-                });
-            },
-            error: function(object, error) {
-                document.write("error");
-            }
-        });
+    var query = new Parse.Query(AlarmObject); 
+    query.get(id, {
+success: function(object) {
+object.destroy( {
+success: function(myobject) {
+$("#deleteAlarm").empty();
+$("#deleteAlarm").append("<option></option>");
+getAllAlarms();
+}
+});
+},
+error: function(object, error) {
+document.write("error");
+}
+});
 }
 
 function fillDropdowns() {
     var dropdown = $("#hours");
-    
+
     for (var i = 1; i <= 12; i++)
         dropdown.append("<option>" + i + "</option>");
 
     dropdown = $("#mins");
     for (var i = 0; i <= 59; i++) {
-       dropdown.append("<option>" + (i < 10 ? "0" + i : i) + "</option>"); 
+        dropdown.append("<option>" + (i < 10 ? "0" + i : i) + "</option>"); 
     }
 
 }
@@ -51,9 +51,9 @@ success: function(results) {
 for (var i = 0; i < results.length; i++) {
 insertAlarm(results[i].get("time"), results[i].get("alarmName"));
 
-    // add to list of alarms to delete
-    $("#deleteAlarm").append("<option value=\"" + results[i].id + "\">" 
-        + results[i].get("alarmName") + "</option>");
+// add to list of alarms to delete
+$("#deleteAlarm").append("<option value=\"" + results[i].id + "\">" 
+    + results[i].get("alarmName") + "</option>");
 }
 }
 });
@@ -75,7 +75,7 @@ function insertAlarm(time, alarmName) {
 
     listing.append($("<div>").addClass("time").html(time));
     $("#alarms").append(listing); 
-    
+
 
 }
 
@@ -91,12 +91,12 @@ function addAlarm() {
     var alarmObject = new AlarmObject();
     alarmObject.save({"time": time, "alarmName": alarmName}, {
 success: function(object) {
-    insertAlarm(time, alarmName);
-    hideAlarmPopup();
-    
-    // add to list of alarms to delete
-    $("#deleteAlarm").append("<option value=\"" + alarmObject.id + "\">" 
-        + alarmName + "</option>");
+insertAlarm(time, alarmName);
+hideAlarmPopup();
+
+// add to list of alarms to delete
+$("#deleteAlarm").append("<option value=\"" + alarmObject.id + "\">" 
+    + alarmName + "</option>");
 }
 });
 
@@ -119,7 +119,7 @@ function getTime() {
     var secs = seconds < 10 ? "0" + seconds : seconds;
 
     var time = "" + hours + ":" + mins + ":" + secs + " " + ampm;
-    
+
     document.getElementById("clock").innerHTML = time; 
     setTimeout(getTime, 1000);
 }
@@ -150,6 +150,14 @@ function getTemp() {
             }
             $("body").addClass(className);
             }
-            );
+    );
 
+}
+
+function signinCallback(authResult) {
+    if (authResult['status']['signed_in']) {
+        document.getElementById('signinButton').setAttribute('style', 'display: none');
+    } else {
+        console.log('Sign-in state: ' + authResult['error']);
+    }
 }
