@@ -8,6 +8,9 @@ $(document).ready(function() {
 var USERID;
 
 function deleteAlarm() {
+   if (!USERID)
+      return;
+
     var id = $("#deleteAlarm").val();
 
     var AlarmObject = Parse.Object.extend("Alarm");
@@ -18,7 +21,7 @@ object.destroy( {
 success: function(myobject) {
 $("#deleteAlarm").empty();
 $("#deleteAlarm").append("<option></option>");
-getAllAlarms(id);
+getAllAlarms(USERID);
 }
 });
 },
