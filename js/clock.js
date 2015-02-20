@@ -8,10 +8,9 @@ $(document).ready(function() {
 var USERID;
 
 function deleteAlarm() {
-   if (!USERID)
-      return;
-
     var id = $("#deleteAlarm").val();
+   if (!USERID || !id)
+      return;
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject); 
