@@ -18,7 +18,7 @@ object.destroy( {
 success: function(myobject) {
 $("#deleteAlarm").empty();
 $("#deleteAlarm").append("<option></option>");
-getAllAlarms();
+getAllAlarms(id);
 }
 });
 },
