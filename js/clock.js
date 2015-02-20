@@ -9,8 +9,6 @@ var USERID;
 
 function deleteAlarm() {
     var id = $("#deleteAlarm").val();
-    if (!id)
-        return;
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject); 
