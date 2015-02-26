@@ -8,6 +8,7 @@ $(document).ready(function() {
 var USERID;
 
 function deleteAlarm() {
+    ga('send', 'event', 'Alarm', 'Delete');
     var id = $("#deleteAlarm").val();
    if (!USERID || !id)
       return;
@@ -63,6 +64,7 @@ $("#deleteAlarm").append("<option value=\"" + results[i].id + "\">"
 }
 
 function showAlarmPopup() {
+    ga('send', 'event', 'Alarm', 'Add');
    if (!USERID) {
       alert("You ain't logged in...");
       return;
