@@ -9,8 +9,8 @@ var USERID;
 
 function deleteAlarm() {
     var id = $("#deleteAlarm").val();
-    if (!id)
-        return;
+   if (!USERID || !id)
+      return;
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject); 
@@ -63,6 +63,10 @@ $("#deleteAlarm").append("<option value=\"" + results[i].id + "\">"
 }
 
 function showAlarmPopup() {
+   if (!USERID) {
+      alert("You ain't logged in...");
+      return;
+   }
     $("#mask").removeClass("hide");
     $("#popup").removeClass("hide");
 }
