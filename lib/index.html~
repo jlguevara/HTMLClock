@@ -8,6 +8,9 @@
             var obj = {'client_id': 'ed1f4bc87a200f4', 
                 'type': 'token', 'callback_function': doTheDamnThing};
             init(obj);
+
+            function doTheDamnThing() {
+            }
         </script>
     </body>
 </html>
