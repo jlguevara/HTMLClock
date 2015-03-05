@@ -5,7 +5,7 @@
     <body>
         <button id="login" type="button" onclick="login()">Login</button>
         <script>
-            var obj = {'client_id': ed1f4bc87a200f4, 
+            var obj = {'client_id': 'ed1f4bc87a200f4', 
                 'type': 'token', 'callback_function': doTheDamnThing};
             init(obj);
         </script>
