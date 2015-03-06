@@ -17,5 +17,7 @@ function redirect_init() {
             console.log("no local storage");
         }
     }
+    window.opener.callback_function();
+    window.close();
 }
 
