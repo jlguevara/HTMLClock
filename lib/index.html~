@@ -19,14 +19,13 @@
                     url: "https://api.imgur.com/3/account/me",
                     type: "GET",
                     headers: {
-                        "Authorization": "Bearer " + localStorage.access_toke
+                        "Authorization": "Bearer " + localStorage.access_token
                     },
                     success: function(data) {
-                        console.log("success");
                         alert(data.data.url);
                     },
                     error: function(error) {
-                        console.log("error");
+                        console.log("error contacting api");
                     }
                 });
             }
