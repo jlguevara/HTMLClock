@@ -7,13 +7,27 @@
         <script>
             var obj = {'client_id': 'ed1f4bc87a200f4', 
                 'type': 'token', 'callback_function': doTheDamnThing};
+
             init(obj);
 
             function doTheDamnThing() {
                 var b = document.getElementById("login");
                 b.style.display = 'none';
-                document
 
+                $.ajax({
+                    url: "https://api.imgur.com/3/account/me",
+                    type: "GET",
+                    headers: {
+                        "Authorization": "Bearer" + localStorage.access_toke
+                    },
+                    success: function(data) {
+                        console.log("success");
+                        alert(data.data.url);
+                    },
+                    error: function(error) {
+                        console.log("error");
+                    }
+                });
             }
         </script>
     </body>
